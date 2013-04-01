@@ -6,7 +6,7 @@ class BluetoothServer extends Thread {
     DataInputStream in;
     DataOutputStream out;
     int size;
-    final Handler handler;
+    public Handler handler;
   final Runnable updateUI;
 
   byte[] imgData;
@@ -22,7 +22,7 @@ class BluetoothServer extends Thread {
   }
 
   public void run(){
-   
+   Looper.prepare();
     try {
       
       serverSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord("helloService", UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
@@ -54,7 +54,7 @@ class BluetoothServer extends Thread {
       catch (Exception e) {
       }
        
-      
+      Looper.loop();
   }
   }
 
